@@ -1,0 +1,24 @@
+<% include('../layouts/header.ejs') %>
+<link rel="stylesheet" href="/adminHome.css">
+<% include('../layouts/center.ejs') %>
+
+<div class="container">
+  <h1>Welcome, <%= admin.name %></h1>
+
+  <a href="/admin/dashboard">Dashboard</a>
+
+  <table>
+    <tr>
+      <td>Email</td>
+      <td><%= admin.email %></td>
+    </tr>
+    <tr>
+      <td>Mobile</td>
+      <td><%= admin.mobile %></td>
+    </tr>
+  </table>
+
+  <a href="/admin/logout">Logout</a>
+</div>
+
+<% include('../layouts/footer.ejs') %>

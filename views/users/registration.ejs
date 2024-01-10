@@ -1,0 +1,87 @@
+<% include('../layouts/header.ejs') %>
+<link rel="stylesheet" href="/registrationUser.css">
+<% include('../layouts/center.ejs') %>
+
+<div class="container">
+  <h1>User Registration Form</h1>
+
+  <form action="/register" method="post" onsubmit="return validateForm()">
+    <input type="text" name="name" id="name" placeholder="Enter Name" required>
+    <span id="nameError" class="error"></span>
+    
+    <input type="email" name="email" id="email" placeholder="Enter Email" required>
+    <span id="emailError" class="error"></span>
+
+    <input type="text" name="mno" id="mno" placeholder="Enter Mobile" required>
+    <span id="mnoError" class="error"></span>
+    
+    <input type="password" name="password" id="password" placeholder="Enter Password" required>
+    <span id="pError" class="error"></span>
+    
+    <input type="submit" value="Register">
+  </form>
+
+  <a href="/login">Go back</a>
+
+  <% if (typeof message !== 'undefined') { %>
+    <p><%= message %></p>
+  <% } %>
+</div>
+
+<style>
+ 
+    .error {
+        font-size: x-small;
+        color: red;
+    
+    }
+</style>
+
+<script>
+    function validateForm() {
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var mno = document.getElementById('mno').value;
+      var password = document.getElementById('password').value;
+
+        
+  
+     // Email validation using regular expression
+     const emailRegex = /^[a-zA-Z0-9._%+-]+@['gmail']+\.[a-zA-Z]{2,4}$/;
+        if (!emailRegex.test(email)) {
+            document.getElementById('emailError').innerHTML = 'Please enter a valid Gmail address.';
+            return false;
+        }
+
+        // Mobile number validation (only numbers allowed)
+        if (!/^\d+$/.test(mno)) {
+            document.getElementById('mnoError').innerHTML = 'Mobile number should contain only numbers.';
+            return false;
+        }
+
+        // Name validation (only text allowed)
+        if (!/^[a-zA-Z][a-zA-z-0-9]*$/.test(name)) {
+            document.getElementById('nameError').innerHTML = 'Name should start with an alphabet then numbers(no Spaces)';
+            return false;
+        }
+        
+        // Password validation(no spaces)
+        if(password.includes(' ')){
+          document.getElementById("pError").innerHTML = 'Password should not contain Spaces';
+          return false;
+        }
+
+       
+
+        return true;
+    }
+  </script>
+
+  
+  
+  
+  
+  
+
+
+<% include('../layouts/footer.ejs') %>

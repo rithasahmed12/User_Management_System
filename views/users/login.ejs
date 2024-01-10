@@ -1,0 +1,54 @@
+<% include('../layouts/header.ejs') %>
+<link rel="stylesheet" href="/loginUser.css">
+<% include('../layouts/center.ejs') %>
+
+<div class="container">
+  <h1>User Login</h1>
+
+  <% if (typeof message !== 'undefined') { %>
+    <h4><%= message %></h4>
+  <% } %>
+
+  <form action="/login" method="post" onsubmit="return validateForm()">
+    <input type="email" name="email" id="email" placeholder="Enter Email">
+    <span id="emailError" class="error"></span>
+
+    <input type="password" name="password" id="password" placeholder="Enter Password">
+    <span id="pError" class="error"></span>
+    <input type="submit" value="Login">
+    <a href="/register">Sign up</a>
+  </form>
+</div>
+
+<style>
+ 
+  .error {
+      font-size: x-small;
+      color: red;
+  
+  }
+</style>
+
+<script>
+  function validateForm(){
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+     // Email validation using regular expression
+     const emailRegex = /^[a-zA-Z0-9._%+-]+@['gmail']+\.[a-zA-Z]{2,4}$/;
+        if (!emailRegex.test(email)) {
+            document.getElementById('emailError').innerHTML = 'Please enter a valid Gmail address.';
+            return false;
+        }
+
+          // Password validation(no-spaces)
+          if(password.includes(' ')){
+          document.getElementById("pError").innerHTML = 'Password should not contain Spaces';
+          return false;
+        }
+
+        return true;
+  }
+</script>
+
+<% include('../layouts/footer.ejs') %>
